@@ -1,6 +1,5 @@
-export { SideBar } from './sidebar'
-
-export { Title } from './title'
-
+export { Footer } from './footer'
 export { NotFoundPage } from './not-found'
+export { SideBar } from './sidebar'
+export { Title } from './title'
 export { TopMenu } from './top-menu'
