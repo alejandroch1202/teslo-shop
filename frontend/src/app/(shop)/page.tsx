@@ -8,8 +8,8 @@ export default function HomePage() {
   return (
     <>
       <Title
-        title='Tienda'
-        subtitle='Todos los productos'
+        title='Todos'
+        subtitle='Articulos para todos'
         className='mb-2'
       />
 
