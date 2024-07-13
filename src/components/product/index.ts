@@ -1,3 +1,4 @@
+export { StockLabel } from './stock-label'
 export { SlideShow } from './slideshow'
 export { SlideShowMobile } from './slideshow-mobile'
 export { QuantitySelector } from './quantity-selector'
