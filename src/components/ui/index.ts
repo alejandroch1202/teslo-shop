@@ -1,3 +1,4 @@
+export { Pagination } from './pagination'
 export { Footer } from './footer'
 export { NotFoundPage } from './not-found'
 export { SideBar } from './sidebar'
