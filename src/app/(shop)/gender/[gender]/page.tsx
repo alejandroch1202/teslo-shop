@@ -1,3 +1,5 @@
+export const revalidate = 60 // 60 seconds
+
 import { notFound, redirect } from 'next/navigation'
 import { ProductsGrid } from '@/components/products'
 import { Pagination, Title } from '@/components/ui'

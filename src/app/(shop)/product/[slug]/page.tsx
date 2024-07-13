@@ -25,7 +25,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <div className='mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3'>
       {/* mobile slideshow */}
-      <div className='bg-gray-200 col-span-1 md:col-span-2 block md:hidden'>
+      <div className='bg-gray-200 col-span-1 md:col-span-2 block md:hidden fade-in'>
         <SlideShowMobile
           title={product.title}
           images={product.images}
@@ -33,7 +33,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
 
       {/* desktop slideshow */}
-      <div className='bg-gray-200 col-span-1 md:col-span-2 hidden md:block rounded-lg'>
+      <div className='bg-gray-200 col-span-1 md:col-span-2 hidden md:block rounded-lg fade-in'>
         <SlideShow
           title={product.title}
           images={product.images}

@@ -1,7 +1,9 @@
+export const revalidate = 60 // 60 seconds
+
+import { redirect } from 'next/navigation'
 import { getPaginatedProductsWithImages } from '@/actions/products'
 import { ProductsGrid } from '@/components/products'
 import { Pagination, Title } from '@/components/ui'
-import { redirect } from 'next/navigation'
 
 interface HomePageProps {
   searchParams: {
