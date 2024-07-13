@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { ProductsGrid } from '@/components/products'
 import { Title } from '@/components/ui'
-import { initialData } from '@/data/seed'
+import { initialData } from '@/seed'
 import { Category } from '@/interfaces'
 
 const products = initialData.products

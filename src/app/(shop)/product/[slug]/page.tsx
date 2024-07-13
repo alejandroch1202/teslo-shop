@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { initialData } from '@/data/seed'
+import { initialData } from '@/seed'
 import { titleFont } from '@/config/fonts'
 import {
   QuantitySelector,

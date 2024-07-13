@@ -20,7 +20,19 @@ yarn
 docker-compose up -d
 ```
 
-5. Run the project in development mode
+5. Run Prisma migrations
+
+```
+npx prisma migrate dev
+```
+
+6. Execute the seed
+
+```
+yarn seed
+```
+
+7. Run the project in development mode
 
 ```
 yarn dev

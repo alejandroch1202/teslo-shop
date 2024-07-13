@@ -1,6 +1,6 @@
 import { ProductsGrid } from '@/components/products'
 import { Title } from '@/components/ui'
-import { initialData } from '@/data/seed'
+import { initialData } from '@/seed'
 
 const products = initialData.products
 
