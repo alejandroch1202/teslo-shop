@@ -3,10 +3,10 @@
 import Link from 'next/link'
 import { IoCartOutline, IoSearch } from 'react-icons/io5'
 import { titleFont } from '@/config/fonts'
-import { useStore } from '@/store'
+import { useSideMenuStore } from '@/store'
 
 export const TopMenu = () => {
-  const openSideMenu = useStore((state) => state.openSideMenu)
+  const openSideMenu = useSideMenuStore((state) => state.openSideMenu)
 
   return (
     <nav className='flex px-5 justify-between items-center w-full'>

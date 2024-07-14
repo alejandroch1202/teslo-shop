@@ -11,6 +11,7 @@ import {
 } from '@/components/product'
 import { getProductBySlug } from '@/actions/products'
 import { Metadata, ResolvingMetadata } from 'next'
+import { AddToCart } from './add-to-cart'
 
 interface ProductPageProps {
   params: {
@@ -46,9 +47,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = params
   const product = await getProductBySlug(slug)
 
-  if (!product) {
-    notFound()
-  }
+  if (!product) notFound()
 
   return (
     <div className='mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3'>
@@ -79,15 +78,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {product.title}
         </h1>
         <p className='text-lg mb-5'>{product.price}</p>
-        {/* size selector */}
-        <SizeSelector
-          selectedSize={product.sizes[1]}
-          availableSizes={product.sizes}
-        />
-        {/* quantity selector */}
-        <QuantitySelector quantity={2} />
-        {/* add to cart button */}
-        <button className='btn-primary my-5'>Agregar al carrito</button>
+
+        <AddToCart product={product} />
+
         {/* description */}
         <h3 className='font-bold text-sm '>Descripción</h3>
         <p className='font-light'>{product.description}</p>

@@ -1,13 +1,15 @@
 import type { Size } from '@/interfaces'
 
 interface SizeSelectorProps {
-  selectedSize: Size
   availableSizes: Size[]
+  selectedSize?: Size
+  onSizeSelected: (size: Size) => void
 }
 
 export const SizeSelector = ({
   selectedSize,
-  availableSizes
+  availableSizes,
+  onSizeSelected
 }: SizeSelectorProps) => {
   return (
     <div className='my-5'>
@@ -16,6 +18,7 @@ export const SizeSelector = ({
       <div className='flex'>
         {availableSizes.map((size) => (
           <button
+            onClick={() => onSizeSelected(size)}
             key={size}
             className={`py-2 px-3 mx-2 rounded ${
               selectedSize === size ? 'border-2 border-blue-500' : 'border'
