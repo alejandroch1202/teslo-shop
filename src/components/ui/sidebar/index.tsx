@@ -1,6 +1,6 @@
 'use client'
 
-import { useStore } from '@/store'
+import { useSideMenuStore } from '@/stores'
 import clsx from 'clsx'
 import Link from 'next/link'
 import {
@@ -15,8 +15,8 @@ import {
 } from 'react-icons/io5'
 
 export const SideBar = () => {
-  const isSideMenuOpen = useStore((store) => store.isSideMenuOpen)
-  const closeSideMenu = useStore((store) => store.closeSideMenu)
+  const isSideMenuOpen = useSideMenuStore((store) => store.isSideMenuOpen)
+  const closeSideMenu = useSideMenuStore((store) => store.closeSideMenu)
 
   return (
     <div>

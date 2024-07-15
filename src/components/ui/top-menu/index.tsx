@@ -1,12 +1,19 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { IoCartOutline, IoSearch } from 'react-icons/io5'
 import { titleFont } from '@/config/fonts'
-import { useSideMenuStore } from '@/store'
+import { useCartStore, useSideMenuStore } from '@/stores'
 
 export const TopMenu = () => {
+  const [loaded, setLoaded] = useState(false)
   const openSideMenu = useSideMenuStore((state) => state.openSideMenu)
+  const totalItemsInCart = useCartStore((state) => state.getTotalItems()) // excecuting
+
+  useEffect(() => {
+    setLoaded(true) // component mounted. now we can render the data and avoid hydratation error
+  }, [])
 
   return (
     <nav className='flex px-5 justify-between items-center w-full'>
@@ -52,13 +59,15 @@ export const TopMenu = () => {
         </Link>
 
         <Link
-          href='/cart'
+          href={totalItemsInCart === 0 && loaded ? '/empty' : '/cart'}
           className='mx-2'
         >
           <div className='relative'>
-            <span className='absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white'>
-              3
-            </span>
+            {loaded && totalItemsInCart > 0 && (
+              <span className='fade-in absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white'>
+                {totalItemsInCart}
+              </span>
+            )}
             <IoCartOutline className='w-5 h-5' />
           </div>
         </Link>

@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import { QuantitySelector, SizeSelector } from '@/components/product'
-import { Product, Size } from '@/interfaces'
+import { CartProduct, Product, Size } from '@/interfaces'
+import { useCartStore } from '@/stores'
 
 export const AddToCart = ({ product }: { product: Product }) => {
+  const addProductToCart = useCartStore((state) => state.addProductToCart)
   const [size, setSize] = useState<Size | undefined>()
   const [quantity, setQuantity] = useState<number>(1)
   const [errorMessage, setErrorMessage] = useState(false)
@@ -15,7 +17,19 @@ export const AddToCart = ({ product }: { product: Product }) => {
       return
     }
 
-    console.log({ size, quantity })
+    const cartProduct: CartProduct = {
+      id: product.id,
+      slug: product.slug,
+      title: product.title,
+      price: product.price,
+      quantity: quantity,
+      size: size,
+      image: product.images[0]
+    }
+
+    addProductToCart(cartProduct)
+    setQuantity(1)
+    setSize(undefined)
   }
 
   return (
