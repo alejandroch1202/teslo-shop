@@ -9,6 +9,19 @@ export const authConfig: NextAuthConfig = {
     signIn: '/auth/login',
     newUser: '/auth/signup'
   },
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.user = user
+      return token
+    },
+
+    async session({ session, token }) {
+      session.user = token.user as any
+      return session
+    }
+  },
+
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -30,12 +43,10 @@ export const authConfig: NextAuthConfig = {
 
         const { password: _, ...userWithoutPassword } = user
 
-        console.log({ user: userWithoutPassword })
-
         return userWithoutPassword
       }
     })
   ]
 }
 
-export const { signIn, signOut, auth } = NextAuth(authConfig)
+export const { signIn, signOut, auth, handlers } = NextAuth(authConfig)
