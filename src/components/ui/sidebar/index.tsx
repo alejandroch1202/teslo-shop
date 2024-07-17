@@ -1,8 +1,7 @@
 'use client'
 
-import { useSideMenuStore } from '@/stores'
-import clsx from 'clsx'
 import Link from 'next/link'
+import clsx from 'clsx'
 import {
   IoCloseOutline,
   IoLogInOutline,
@@ -13,6 +12,8 @@ import {
   IoShirtOutline,
   IoTicketOutline
 } from 'react-icons/io5'
+import { logout } from '@/actions/auth'
+import { useSideMenuStore } from '@/stores'
 
 export const SideBar = () => {
   const isSideMenuOpen = useSideMenuStore((store) => store.isSideMenuOpen)
@@ -65,7 +66,8 @@ export const SideBar = () => {
 
         {/* menu */}
         <Link
-          href='/'
+          href='/profile'
+          onClick={closeSideMenu}
           className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
         >
           <IoPersonOutline size={30} />
@@ -79,19 +81,24 @@ export const SideBar = () => {
           <span className='ml-3 text-xl'>Ordenes</span>
         </Link>
         <Link
-          href='/'
+          onClick={closeSideMenu}
+          href='/auth/login'
           className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
         >
           <IoLogInOutline size={30} />
           <span className='ml-3 text-xl'>Iniciar sesion</span>
         </Link>
-        <Link
-          href='/'
-          className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+        <button
+          onClick={() => {
+            logout()
+            closeSideMenu()
+          }}
+          className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
         >
           <IoLogOutOutline size={30} />
+
           <span className='ml-3 text-xl'>Cerrar sesion</span>
-        </Link>
+        </button>
 
         {/* divider */}
         <div className='w-full h-px bg-gray-200 my-10 rounded'></div>

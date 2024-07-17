@@ -2,13 +2,7 @@ export const revalidate = 604800 // 7 days
 
 import { notFound } from 'next/navigation'
 import { titleFont } from '@/config/fonts'
-import {
-  QuantitySelector,
-  SizeSelector,
-  SlideShow,
-  SlideShowMobile,
-  StockLabel
-} from '@/components/product'
+import { SlideShow, SlideShowMobile, StockLabel } from '@/components/product'
 import { getProductBySlug } from '@/actions/products'
 import { Metadata, ResolvingMetadata } from 'next'
 import { AddToCart } from './add-to-cart'

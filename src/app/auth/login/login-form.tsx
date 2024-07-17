@@ -5,9 +5,18 @@ import Link from 'next/link'
 import { authenticate } from '@/actions/auth'
 import { IoInformationCircleOutline } from 'react-icons/io5'
 import clsx from 'clsx'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
+  const router = useRouter()
   const [state, formAction] = useFormState(authenticate, undefined)
+
+  useEffect(() => {
+    if (state === 'success') {
+      router.replace('/')
+    }
+  }, [router, state])
 
   return (
     <form
