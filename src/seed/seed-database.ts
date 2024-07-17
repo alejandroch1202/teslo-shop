@@ -1,9 +1,11 @@
 import { initialData } from '.'
+import { countries } from './seed-countries'
 import prisma from '../lib/db'
 
 async function main() {
   // remove prev data
   await prisma.user.deleteMany()
+  await prisma.country.deleteMany()
   await prisma.productImage.deleteMany()
   await prisma.product.deleteMany()
   await prisma.category.deleteMany()
@@ -45,6 +47,17 @@ async function main() {
     await prisma.productImage.createMany({
       data: imagesData
     })
+  })
+
+  // add countries
+  // countries.forEach(async (country) => {
+  //   await prisma.country.create({
+  //     data: country
+  //   })
+  // })
+
+  await prisma.country.createMany({
+    data: countries
   })
 
   console.log('Seed successfully excecuted')

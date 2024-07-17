@@ -4,6 +4,8 @@ import bcryptjs from 'bcryptjs'
 import { z } from 'zod'
 import prisma from './lib/db'
 
+const authenticatedRoutes = ['/checkout', '/checkout/address']
+
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',
@@ -13,12 +15,12 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
-      const isOnCheckout = nextUrl.pathname.startsWith('/checkout')
+      const isOnCheckout = authenticatedRoutes.includes(nextUrl.pathname)
       if (isOnCheckout) {
         if (isLoggedIn) return true
         return false // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL('/checkout', nextUrl))
+        return true // Response.redirect(new URL('/checkout', nextUrl))
       }
       return true
     },
