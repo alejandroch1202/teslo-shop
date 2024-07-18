@@ -4,6 +4,7 @@ import prisma from '../lib/db'
 
 async function main() {
   // remove prev data
+  await prisma.userAddress.deleteMany()
   await prisma.user.deleteMany()
   await prisma.country.deleteMany()
   await prisma.productImage.deleteMany()
