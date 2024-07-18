@@ -32,7 +32,9 @@ npx prisma migrate dev
 yarn seed
 ```
 
-7. Run the project in development mode
+7. Clean the browser localStorage
+
+8. Run the project in development mode
 
 ```
 yarn dev
