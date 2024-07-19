@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Title } from '@/components/ui'
-import { initialData } from '@/seed'
 import { ProductsInCart } from './products-in-cart'
 import { PlaceOrder } from './place-order'
 

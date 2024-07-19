@@ -1,8 +1,8 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useCartStore } from '@/stores'
-import { useEffect, useState } from 'react'
 import { formatCurrency } from '@/utils'
 
 export const ProductsInCart = () => {
@@ -15,6 +15,10 @@ export const ProductsInCart = () => {
 
   if (!loading) {
     return <p>Cargando...</p>
+  }
+
+  if (productsInCart.length === 0) {
+    window.location.href = '/'
   }
 
   return (

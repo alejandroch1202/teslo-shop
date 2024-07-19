@@ -1,17 +1,21 @@
 'use client'
 
-import { useCartStore } from '@/stores'
-import { useAddressStore } from '@/stores/address'
-import { formatCurrency, sleep } from '@/utils'
-import clsx from 'clsx'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import clsx from 'clsx'
+import { placeOrder } from '@/actions/orders'
+import { useCartStore, useAddressStore } from '@/stores'
+import { formatCurrency } from '@/utils'
 
 export const PlaceOrder = () => {
+  const router = useRouter()
   const [loaded, setLoaded] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
 
   const address = useAddressStore((state) => state.address)
   const cart = useCartStore((state) => state.cart)
+  const emptyCart = useCartStore((state) => state.emptyCart)
   const cartSummary = useCartStore((state) => state.getCartSummary())
 
   useEffect(() => {
@@ -27,12 +31,25 @@ export const PlaceOrder = () => {
       size: product.size
     }))
 
-    console.log({ address, productsToOrder })
+    const response = await placeOrder(productsToOrder, address)
 
-    setIsPlacingOrder(false)
+    if (!response.ok) {
+      setIsPlacingOrder(false)
+      setErrorMessage(response.message)
+      return
+    }
+
+    // everything was ok
+    emptyCart()
+    localStorage.removeItem('address-info')
+    router.replace(`/orders/${response.order?.id}`)
   }
 
   if (!loaded) return <p>Cargando...</p>
+
+  if (!address.address) {
+    window.location.href = '/'
+  }
 
   return (
     <div className='bg-white rounded-xl shadow-lg p-7'>
@@ -97,7 +114,7 @@ export const PlaceOrder = () => {
         </span>
       </p>
 
-      {/* <p className='text-red-500'>Error al colocar la orden</p> */}
+      <p className='text-red-500'>{errorMessage}</p>
 
       <div className='mt-5 mb-2 w-full'>
         <button

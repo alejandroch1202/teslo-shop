@@ -1,10 +1,10 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useCartStore } from '@/stores'
 import { QuantitySelector } from '@/components/product'
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
 
 export const ProductsInCart = () => {
   const [loading, setLoading] = useState(false)
@@ -20,6 +20,10 @@ export const ProductsInCart = () => {
 
   if (!loading) {
     return <p>Cargando...</p>
+  }
+
+  if (productsInCart.length === 0) {
+    window.location.href = '/empty'
   }
 
   return (
