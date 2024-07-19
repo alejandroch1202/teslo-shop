@@ -138,6 +138,7 @@ export const placeOrder = async (
       prismaTx
     }
   } catch (error: any) {
+    console.log(error)
     return {
       ok: false,
       message: error?.message

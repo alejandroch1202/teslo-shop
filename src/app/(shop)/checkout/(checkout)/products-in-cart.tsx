@@ -17,10 +17,6 @@ export const ProductsInCart = () => {
     return <p>Cargando...</p>
   }
 
-  if (productsInCart.length === 0) {
-    window.location.href = '/'
-  }
-
   return (
     <>
       {productsInCart.map((product) => (

@@ -47,10 +47,6 @@ export const PlaceOrder = () => {
 
   if (!loaded) return <p>Cargando...</p>
 
-  if (!address.address) {
-    window.location.href = '/'
-  }
-
   return (
     <div className='bg-white rounded-xl shadow-lg p-7'>
       <h2 className='text-2xl font-bold mb-5'>Dirección de entrega</h2>

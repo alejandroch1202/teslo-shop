@@ -42,16 +42,15 @@ model Category {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  gender      Gender
-  inStock     Int
-  price       Float    @default(0)
-  sizes       Size[]   @default([])
-  slug        String   @unique
-  tags        String[] @default([])
-
+  id           String         @id @default(uuid())
+  title        String
+  description  String
+  gender       Gender
+  inStock      Int
+  price        Float          @default(0)
+  sizes        Size[]         @default([])
+  slug         String         @unique
+  tags         String[]       @default([])
   category     Category       @relation(fields: [categoryId], references: [id])
   categoryId   String
   productImage ProductImage[]
@@ -61,8 +60,8 @@ model Product {
 }
 
 model ProductImage {
-  url String @id @default(uuid())
-
+  id        String  @id @default(uuid())
+  url       String
   product   Product @relation(fields: [productId], references: [id])
   productId String
 }
@@ -95,12 +94,10 @@ model UserAddress {
   postalCode String
   phone      String
   city       String
-
-  contry    Country @relation(fields: [countryId], references: [id])
-  countryId String
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+  country    Country @relation(fields: [countryId], references: [id])
+  countryId  String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String  @unique
 }
 
 model Order {
