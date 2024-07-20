@@ -115,13 +115,17 @@ export const placeOrder = async (
       // validate if some price is zero, throw an error
 
       // create the order address
-      const { country, ...rest } = address
-
       const orderAddress = await tx.orderAddress.create({
         data: {
-          ...rest,
+          name: address.name,
+          lastName: address.lastName,
+          address: address.address,
+          address2: address.address2,
+          city: address.city,
+          postalCode: address.postalCode,
+          phone: address.phone,
           orderId: order.id,
-          countryId: country
+          countryId: address.country
         }
       })
 

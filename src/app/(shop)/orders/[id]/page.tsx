@@ -1,10 +1,10 @@
 import { Title } from '@/components/ui'
 import Image from 'next/image'
-import clsx from 'clsx'
-import { IoCardOutline } from 'react-icons/io5'
 import { getOrderById } from '@/actions/orders/get-order-by-id'
 import { notFound } from 'next/navigation'
 import { formatCurrency } from '@/utils'
+import { PayPalButton } from '@/components/paypal'
+import { OrderStatus } from '@/components/order'
 
 interface OrderPageProps {
   params: {
@@ -31,21 +31,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-10'>
           {/* cart */}
           <div className='flex flex-col mt-5'>
-            <div
-              className={clsx(
-                'flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5',
-                {
-                  'bg-red-500': !order!.isPaid,
-                  'bg-green-700': order!.isPaid
-                }
-              )}
-            >
-              <IoCardOutline size={30} />
-              {/* <span className='mx-2'>Pendiente de pago</span> */}
-              <span className='mx-2'>
-                {order!.isPaid ? 'Orden pagada' : 'Order no pagada'}
-              </span>
-            </div>
+            <OrderStatus isPaid={order!.isPaid} />
 
             {/* items */}
             {order!.orderItem.map((product) => (
@@ -109,21 +95,14 @@ export default async function OrderPage({ params }: OrderPageProps) {
             </div>
 
             <div className='mt-5 mb-2 w-full'>
-              <div
-                className={clsx(
-                  'flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5',
-                  {
-                    'bg-red-500': !order!.isPaid,
-                    'bg-green-700': order!.isPaid
-                  }
-                )}
-              >
-                <IoCardOutline size={30} />
-                {/* <span className='mx-2'>Pendiente de pago</span> */}
-                <span className='mx-2'>
-                  {order!.isPaid ? 'Orden pagada' : 'Order no pagada'}
-                </span>
-              </div>
+              {order?.isPaid ? (
+                <OrderStatus isPaid={order!.isPaid} />
+              ) : (
+                <PayPalButton
+                  orderId={order!.id}
+                  amount={order!.total}
+                />
+              )}
             </div>
           </div>
         </div>

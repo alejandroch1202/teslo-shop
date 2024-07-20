@@ -1,1 +1,1 @@
-export { Provider } from './session-provider'
+export { Providers } from './session-provider'

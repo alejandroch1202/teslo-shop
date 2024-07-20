@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.5.0",
     "@prisma/client": "5.16.2",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
