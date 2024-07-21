@@ -4,12 +4,12 @@ export const revalidate = 0
 import Link from 'next/link'
 import { IoCardOutline } from 'react-icons/io5'
 
-import { getOrdersByUser } from '@/actions/orders'
+import { getPaginatedOrders } from '@/actions/orders'
 import { Title } from '@/components/ui'
 import { redirect } from 'next/navigation'
 
 export default async function OrderPage() {
-  const { ok, data: orders = [] } = await getOrdersByUser()
+  const { ok, data: orders = [] } = await getPaginatedOrders()
   if (!ok) redirect('/auth/login')
 
   return (

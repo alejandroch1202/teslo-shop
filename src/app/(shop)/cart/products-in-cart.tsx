@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useCartStore } from '@/stores'
 import { QuantitySelector } from '@/components/product'
+import { ProductImage } from '@/components/products'
 
 export const ProductsInCart = () => {
   const [loading, setLoading] = useState(false)
@@ -33,8 +33,8 @@ export const ProductsInCart = () => {
           key={`${product.size}-${product.slug}`}
           className='flex mb-5'
         >
-          <Image
-            src={`/products/${product.image}`}
+          <ProductImage
+            src={product.image}
             alt={`${product.size}-${product.title}`}
             style={{
               width: '100px',
